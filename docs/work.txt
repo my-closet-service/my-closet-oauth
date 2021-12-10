@@ -1,0 +1,24 @@
+2021-12-01
+
+황남욱 : h2 Database 연동 테스트
+        서버 구동 후 http://localhost:1994/h2 접속 후 Connection
+
+2021-12-03
+
+황남욱 : h2 Database Initialize 테스트
+        참고(https://leveloper.tistory.com/38)
+
+황남욱 : jpa 테스트 소스 커밋
+
+2021-12-04
+
+황남욱 : REST API Response 객체 추가
+
+2021-12-05
+
+황남욱 : Member 관련 패키지 추가
+
+2021-12-10
+
+황남욱 : 프로젝트 분리 및 access token test
+curl mycloset:mycloset-1994@localhost:1995/oauth/token -d grant_type=password -d client_id=mycloset -d scope=read -d username=user -d password=test
