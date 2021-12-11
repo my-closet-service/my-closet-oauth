@@ -22,3 +22,8 @@
 
 황남욱 : 프로젝트 분리 및 access token test
 curl mycloset:mycloset-1994@localhost:1995/oauth/token -d grant_type=password -d client_id=mycloset -d scope=read -d username=user -d password=test
+
+2021-12-11
+
+황남욱 : OAuth2서버 구축 예제 따라하기
+        참고(https://daddyprogrammer.org/post/1239/spring-oauth-authorizationserver/)

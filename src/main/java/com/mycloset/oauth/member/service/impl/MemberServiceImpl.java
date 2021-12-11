@@ -45,7 +45,7 @@ public class MemberServiceImpl implements MemberService {
             memberRepository.save(member);
         }
     }
-
+/*
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
         Optional<Member> memop = memberRepository.findById(userId);
@@ -59,5 +59,5 @@ public class MemberServiceImpl implements MemberService {
 
     private Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+    }*/
 }

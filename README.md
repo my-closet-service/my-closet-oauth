@@ -5,3 +5,4 @@ My-Closet OAuth Server
 https://brunch.co.kr/@sbcoba/1  
 https://autumnly.tistory.com/65  
 https://www.skyer9.pe.kr/wordpress/?p=2294
+https://daddyprogrammer.org/post/1239/spring-oauth-authorizationserver

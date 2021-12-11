@@ -11,9 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 
 @SpringBootApplication(scanBasePackages = "com.mycloset")
 @EntityScan(basePackages = {"com.mycloset.oauth"})
-@EnableAuthorizationServer
-@EnableResourceServer
-public class MyClosetOauthApplication extends ResourceServerConfigurerAdapter {
+public class MyClosetOauthApplication{
 
     public static void main(String[] args) {
         SpringApplication.run(MyClosetOauthApplication.class, args);
