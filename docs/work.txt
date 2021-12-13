@@ -27,3 +27,8 @@ curl mycloset:mycloset-1994@localhost:1995/oauth/token -d grant_type=password -d
 
 황남욱 : OAuth2서버 구축 예제 따라하기
         참고(https://daddyprogrammer.org/post/1239/spring-oauth-authorizationserver/)
+
+2021-12-13
+
+황남욱 : OAuth2서버 구축 예제 따라하기2
+       인증서버 inmemory에서 jdbc방법으로 변경
