@@ -3,6 +3,7 @@ package com.mycloset.oauth.config;
 import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.test.OAuth2ContextConfiguration;
@@ -28,5 +29,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public RestTemplate getRestTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -21,16 +22,11 @@ import javax.annotation.Resource;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public PasswordEncoder noOpPasswordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
-    }
-
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
                 .withUser("user")
-                .password("pass")
+                .password("{bcrypt}$2a$10$Dp7dXcuT5cGW9clQRfJKIe22EVV7rNCjntXWBE6f0e8nPuu6GlRq6")
                 .roles("USER");
     }
 
