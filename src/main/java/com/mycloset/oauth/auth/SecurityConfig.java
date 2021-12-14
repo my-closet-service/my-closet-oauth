@@ -1,9 +1,11 @@
 package com.mycloset.oauth.auth;
 
 import io.netty.util.internal.NoOpTypeParameterMatcher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,13 +24,16 @@ import javax.annotation.Resource;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("{bcrypt}$2a$10$Dp7dXcuT5cGW9clQRfJKIe22EVV7rNCjntXWBE6f0e8nPuu6GlRq6")
-                .roles("USER");
-    }
+    @Autowired
+    private OAuthProvider oAuthProvider;
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.inMemoryAuthentication()
+//                .withUser("user")
+//                .password("{bcrypt}$2a$10$Dp7dXcuT5cGW9clQRfJKIe22EVV7rNCjntXWBE6f0e8nPuu6GlRq6")
+//                .roles("USER");
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,6 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 ).permitAll()
                 .and()
                 .formLogin().and()
+                .authenticationProvider(oAuthProvider)
                 .httpBasic();
     }
 }
