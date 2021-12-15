@@ -4,6 +4,10 @@ import com.mycloset.oauth.member.entity.Member;
 import com.mycloset.oauth.member.repository.MemberRepository;
 import com.mycloset.oauth.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
     private MemberRepository memberRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    private final AccountStatusUserDetailsChecker detailsChecker = new AccountStatusUserDetailsChecker();
 
     @PostConstruct
     public void init() {
@@ -33,5 +38,12 @@ public class MemberServiceImpl implements MemberService {
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build()
         );
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String userId) {
+        Member member = memberRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException("user is not exists"));
+        detailsChecker.check(member);
+        return member;
     }
 }
