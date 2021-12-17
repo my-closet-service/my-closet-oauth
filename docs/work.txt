@@ -40,3 +40,7 @@ curl mycloset:mycloset-1994@localhost:1995/oauth/token -d grant_type=password -d
 2021-12-15
 
 황남욱 : OAuth2 토큰 DB로 저장하는 방식 예제 구현 및 jwt토큰 사용, refresh_token으로 토큰 재발급 컨트롤러 추가
+
+2021-12-17
+
+황남욱 : H2 tcp서버로 변경 , OAuth2 Resource 서버에서 접근할 수 있도록 변경
