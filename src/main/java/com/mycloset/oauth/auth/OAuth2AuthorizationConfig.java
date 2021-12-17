@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerEndpointsConfiguration;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
@@ -38,15 +39,27 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception{
-        super.configure(endpoints);
-        endpoints.accessTokenConverter(jwtAccessTokenConverter())
-                .userDetailsService(memberService);
+        endpoints.tokenStore(new JdbcTokenStore(dataSource)).userDetailsService(memberService);
     }
 
-    @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter converter =  new JwtAccessTokenConverter();
-        converter.setSigningKey(signKey);
-        return converter;
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception{
+        security.tokenKeyAccess("permitAll()")
+                .checkTokenAccess("isAuthenticated()")
+                .allowFormAuthenticationForClients();
     }
+
+//    @Override
+//    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception{
+//        super.configure(endpoints);
+//        endpoints.accessTokenConverter(jwtAccessTokenConverter())
+//                .userDetailsService(memberService);
+//    }
+//
+//    @Bean
+//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+//        JwtAccessTokenConverter converter =  new JwtAccessTokenConverter();
+//        converter.setSigningKey(signKey);
+//        return converter;
+//    }
 }
